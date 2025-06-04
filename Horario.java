@@ -15,7 +15,8 @@ public class Horario {
         this.horaFin = horaFin;
   
     }
-    
+
+
     public boolean cubre(LocalTime inicio, LocalTime fin){
         return (inicio.equals(horaInicio) || inicio.isAfter(horaInicio)) && 
                 (fin.equals(horaFin) || fin.isBefore(horaFin));

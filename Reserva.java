@@ -8,12 +8,16 @@ import java.time.LocalTime;
 public class Reserva {
     private int id;
     private Finca finca;
-    private Cliente cliete;
-    private LocalDate fecha;
+    private Cliente cliente;
+    private ReservaValida reserva;
+    /*private LocalDate fecha;
     private LocalTime horaInicio;
     private LocalTime horaFin;
 
-    public Reserva(int id, Finca finca, Cliente cliete,LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
+     */
+
+
+    /*public Reserva(int id, Finca finca, Cliente cliete,LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
         this.id = id;
         this.finca = finca;
         this.cliete = cliete;
@@ -21,21 +25,48 @@ public class Reserva {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
-    
+     */
+
+    public Reserva(int id, Finca finca, Cliente cliente, ReservaValida reserva) {
+        this.id = id;
+        this.finca = finca;
+        this.cliente = cliente;
+        this.reserva = reserva;
+    }
+
     public double calcularTotal(){
-        long horas = Duration.between(horaInicio, horaFin).toHours();
+        long horas = Duration.between(reserva.getHoraInicio(), reserva.getHoraFin()).toHours();
         return finca.calcularPrecio((int) horas);
     }
-    
+    /*
     public boolean esValido(){
         return finca.esDisponible(fecha, horaInicio, horaFin);
+    }*/
+
+    public boolean esValido(){
+        return finca.esDisponible(reserva.getFechaReserva(), reserva.getHoraInicio(),reserva.getHoraFin());
     }
-    
+
     public Finca getFinca(){
         return finca;
     }
-    
-    public LocalDate getFecha(){
+
+    public LocalDate getFechaValida() {
+        return reserva.getFechaReserva();
+    }
+    public LocalTime getHoraInicioValido() {
+        return reserva.getHoraInicio();
+    }
+
+    public LocalTime getHoraFinValido() {
+        return reserva.getHoraFin();
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /*public LocalDate getFecha(){
         return fecha;
     }
 
@@ -45,7 +76,7 @@ public class Reserva {
 
     public LocalTime getHoraFin() {
         return horaFin;
-    }
+    }*/
     
     
 }

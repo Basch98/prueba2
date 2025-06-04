@@ -53,5 +53,5 @@ public class Finca {
         return nombre;
     } 
 
-    
+
 }
